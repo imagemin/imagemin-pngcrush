@@ -1,12 +1,8 @@
 'use strict';
 
-var execFile = require('child_process').execFile;
-var fs = require('fs');
+var ExecBuffer = require('exec-buffer');
 var imageType = require('image-type');
-var path = require('path');
 var pngcrush = require('pngcrush-bin').path;
-var tempfile = require('tempfile');
-var rm = require('rimraf');
 
 /**
  * pngcrush image-min plugin
@@ -23,48 +19,22 @@ module.exports = function (opts) {
             return cb();
         }
 
-        fs.exists(pngcrush, function (exists) {
-            if (!exists) {
-                pngcrush = path.dirname(pngcrush);
-            }
+        var exec = new ExecBuffer();
+        var args = ['-brute', '-q'];
 
-            var args = ['-brute', '-q'];
-            var src = tempfile('.png');
-            var dest = tempfile('.png');
+        if (opts.reduce) {
+            args.push('-reduce');
+        }
 
-            if (opts.reduce) {
-                args.push('-reduce');
-            }
-
-            fs.writeFile(src, file.contents, function (err) {
+        exec
+            .use(pngcrush, args.concat([exec.src(), exec.dest()]))
+            .run(file.contents, function (err, buf) {
                 if (err) {
                     return cb(err);
                 }
 
-                execFile(pngcrush, args.concat([src, dest]), function (err) {
-                    if (err) {
-                        return cb(err);
-                    }
-
-                    fs.readFile(dest, function (err, buf) {
-                        rm(src, function (err) {
-                            if (err) {
-                                return cb(err);
-                            }
-
-                            rm(dest, function (err) {
-                                if (err) {
-                                    return cb(err);
-                                }
-
-                                file.contents = buf;
-
-                                cb();
-                            });
-                        });
-                    });
-                });
+                file.contents = buf;
+                cb();
             });
-        });
     };
 };
