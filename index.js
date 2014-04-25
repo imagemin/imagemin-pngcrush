@@ -20,7 +20,7 @@ module.exports = function (opts) {
         }
 
         var exec = new ExecBuffer();
-        var args = ['-brute', '-q'];
+        var args = ['-ow', '-brute', '-q'];
 
         if (opts.reduce) {
             args.push('-reduce');

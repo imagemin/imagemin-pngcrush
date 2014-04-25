@@ -22,6 +22,15 @@ var imagemin = new Imagemin()
 imagemin.optimize();
 ```
 
+## Options
+
+### reduce
+
+Type: `Boolean`  
+Default: `false`
+
+Enable lossless color-type or bit-depth reduction.
+
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License) © [Kevin Mårtensson](https://github.com/kevva)
