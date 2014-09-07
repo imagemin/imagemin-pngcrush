@@ -28,12 +28,12 @@
     "png"
   ],
   "dependencies": {
-    "exec-buffer": "^0.1.0",
+    "exec-buffer": "^1.0.1",
     "is-png": "^1.0.0",
-    "pngcrush-bin": "^0.1.10"
+    "pngcrush-bin": "^1.0.0"
   },
   "devDependencies": {
     "ava": "^0.0.4",
-    "imagemin": "^0.4.7"
+    "imagemin": "^1.0.5"
   }
 }
