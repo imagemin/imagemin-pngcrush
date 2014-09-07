@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "pngcrush image-min plugin",
   "license": "MIT",
-  "repository": "kevva/imagemin-pngcrush",
+  "repository": "imagemin/imagemin-pngcrush",
   "author": {
     "name": "Kevin Mårtensson",
     "email": "kevinmartensson@gmail.com",
