@@ -1,7 +1,7 @@
 'use strict';
 
 var ExecBuffer = require('exec-buffer');
-var imageType = require('image-type');
+var isPng = require('is-png');
 var pngcrush = require('pngcrush-bin').path;
 
 /**
@@ -12,29 +12,31 @@ var pngcrush = require('pngcrush-bin').path;
  */
 
 module.exports = function (opts) {
-    opts = opts || {};
+	opts = opts || {};
 
-    return function (file, imagemin, cb) {
-        if (imageType(file.contents) !== 'png') {
-            return cb();
-        }
+	return function (file, imagemin, cb) {
+		if (!isPng(file.contents)) {
+			cb();
+			return;
+		}
 
-        var exec = new ExecBuffer();
-        var args = ['-ow', '-brute', '-q'];
+		var exec = new ExecBuffer();
+		var args = ['-brute', '-force', '-q'];
 
-        if (opts.reduce) {
-            args.push('-reduce');
-        }
+		if (opts.reduce) {
+			args.push('-reduce');
+		}
 
-        exec
-            .use(pngcrush, args.concat([exec.src(), exec.dest()]))
-            .run(file.contents, function (err, buf) {
-                if (err) {
-                    return cb(err);
-                }
+		exec
+			.use(pngcrush, args.concat([exec.src(), exec.dest()]))
+			.run(file.contents, function (err, buf) {
+				if (err) {
+					cb(err);
+					return;
+				}
 
-                file.contents = buf;
-                cb();
-            });
-    };
+				file.contents = buf;
+				cb();
+			});
+	};
 };
