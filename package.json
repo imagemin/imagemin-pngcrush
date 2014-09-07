@@ -1,6 +1,6 @@
 {
   "name": "imagemin-pngcrush",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "pngcrush image-min plugin",
   "license": "MIT",
   "repository": "kevva/imagemin-pngcrush",
