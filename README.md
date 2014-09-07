@@ -1,12 +1,14 @@
-# imagemin-pngcrush [![Build Status](https://travis-ci.org/kevva/imagemin-pngcrush.svg?branch=master)](https://travis-ci.org/kevva/imagemin-pngcrush)
+# imagemin-pngcrush [![Build Status](http://img.shields.io/travis/imagemin/imagemin-pngcrush.svg?style=flat)](https://travis-ci.org/imagemin/imagemin-pngcrush)
 
 > pngcrush image-min plugin
+
 
 ## Install
 
 ```bash
 $ npm install --save imagemin-pngcrush
 ```
+
 
 ## Usage
 
@@ -15,12 +17,13 @@ var Imagemin = require('image-min');
 var pngcrush = require('imagemin-pngcrush');
 
 var imagemin = new Imagemin()
-    .src('foo.png')
-    .dest('foo-optimized.png')
-    .use(pngcrush({ reduce: true }));
+	.src('foo.png')
+	.dest('foo-optimized.png')
+	.use(pngcrush({ reduce: true }));
 
 imagemin.optimize();
 ```
+
 
 ## Options
 
@@ -31,6 +34,7 @@ Default: `false`
 
 Enable lossless color-type or bit-depth reduction.
 
+
 ## License
 
-MIT © [Kevin Mårtensson](https://github.com/kevva)
+MIT © [imagemin](https://github.com/imagemin)
