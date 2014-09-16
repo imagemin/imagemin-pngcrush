@@ -3,6 +3,7 @@
 var ExecBuffer = require('exec-buffer');
 var isPng = require('is-png');
 var pngcrush = require('pngcrush-bin').path;
+var through = require('through2');
 
 /**
  * pngcrush image-min plugin
@@ -14,9 +15,19 @@ var pngcrush = require('pngcrush-bin').path;
 module.exports = function (opts) {
 	opts = opts || {};
 
-	return function (file, imagemin, cb) {
+	return through.obj(function (file, enc, cb) {
+		if (file.isNull()) {
+			cb(null, file);
+			return;
+		}
+
+		if (file.isStream()) {
+			cb(new Error('Streaming is not supported'));
+			return;
+		}
+
 		if (!isPng(file.contents)) {
-			cb();
+			cb(null, file);
 			return;
 		}
 
@@ -36,7 +47,7 @@ module.exports = function (opts) {
 				}
 
 				file.contents = buf;
-				cb();
+				cb(null, file);
 			});
-	};
+	});
 };

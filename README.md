@@ -17,11 +17,30 @@ var Imagemin = require('imagemin');
 var pngcrush = require('imagemin-pngcrush');
 
 var imagemin = new Imagemin()
-	.src('foo.png')
-	.dest('foo-optimized.png')
+	.src('images/*.png')
+	.dest('build/images')
 	.use(pngcrush({ reduce: true }));
 
-imagemin.optimize();
+imagemin.run(function (err, files) {
+		if (err) {
+				throw err;
+		}
+
+		console.log('Files optimized successfully!');
+});
+```
+
+You can also use this plugin with [gulp](http://gulpjs.com/):
+
+```js
+var gulp = require('gulp');
+var pngcrush = require('imagemin-pngcrush');
+
+gulp.task('default', function () {
+		return gulp.src('images/*.png')
+				.pipe(pngcrush())
+				.pipe(gulp.dest('build/images'));
+});
 ```
 
 
