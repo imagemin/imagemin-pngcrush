@@ -22,11 +22,11 @@ var imagemin = new Imagemin()
 	.use(pngcrush({ reduce: true }));
 
 imagemin.run(function (err, files) {
-		if (err) {
-				throw err;
-		}
+	if (err) {
+		throw err;
+	}
 
-		console.log('Files optimized successfully!');
+	console.log('Files optimized successfully!');
 });
 ```
 
@@ -37,9 +37,9 @@ var gulp = require('gulp');
 var pngcrush = require('imagemin-pngcrush');
 
 gulp.task('default', function () {
-		return gulp.src('images/*.png')
-				.pipe(pngcrush())
-				.pipe(gulp.dest('build/images'));
+	return gulp.src('images/*.png')
+		.pipe(pngcrush())
+		.pipe(gulp.dest('build/images'));
 });
 ```
 

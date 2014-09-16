@@ -10,7 +10,7 @@ var test = require('ava');
 test('optimize a PNG', function (t) {
 	t.plan(3);
 
-	read(path.join(__dirname, 'fixtures/test.png'), function(err, file) {
+	read(path.join(__dirname, 'fixtures/test.png'), function (err, file) {
 		t.assert(!err);
 
 		var stream = pngcrush();
@@ -28,7 +28,7 @@ test('optimize a PNG', function (t) {
 test('skip optimizing non-PNG file', function (t) {
 	t.plan(2);
 
-	read(__filename, function(err, file) {
+	read(__filename, function (err, file) {
 		t.assert(!err);
 
 		var stream = pngcrush();
