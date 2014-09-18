@@ -6,7 +6,7 @@ var pngcrush = require('pngcrush-bin').path;
 var through = require('through2');
 
 /**
- * pngcrush image-min plugin
+ * pngcrush imagemin plugin
  *
  * @param {Object} opts
  * @api public
