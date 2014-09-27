@@ -20,12 +20,14 @@
   ],
   "keywords": [
     "compress",
+    "gulpplugin",
     "image",
     "imageminplugin",
     "img",
     "minify",
     "optimize",
-    "png"
+    "png",
+    "pngcrush"
   ],
   "dependencies": {
     "exec-buffer": "^1.0.1",
