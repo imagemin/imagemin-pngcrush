@@ -31,7 +31,7 @@ module.exports = function (opts) {
 			return;
 		}
 
-		var exec = new ExecBuffer();
+		var exec = new ExecBuffer({ stderr: false });
 		var args = ['-brute', '-force', '-q'];
 
 		if (opts.reduce) {
