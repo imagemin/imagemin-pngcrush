@@ -8,6 +8,52 @@ var through = require('through2');
 /**
  * pngcrush imagemin plugin
  *
+ * @param {Object} file
+ * @param {String} enc
+ * @param {Object} opts
+ * @param {Function} cb
+ * @api private
+ */
+
+function plugin(file, enc, opts, cb) {
+	if (file.isNull()) {
+		cb(null, file);
+		return;
+	}
+
+	if (file.isStream()) {
+		cb(new Error('Streaming is not supported'));
+		return;
+	}
+
+	if (!isPng(file.contents)) {
+		cb(null, file);
+		return;
+	}
+
+	var exec = new ExecBuffer({ stderr: false });
+	var args = ['-brute', '-force', '-q'];
+
+	if (opts.reduce) {
+		args.push('-reduce');
+	}
+
+	exec
+		.use(pngcrush, args.concat([exec.src(), exec.dest()]))
+		.run(file.contents, function (err, buf) {
+			if (err) {
+				cb(err);
+				return;
+			}
+
+			file.contents = buf;
+			cb(null, file);
+		});
+}
+
+/**
+ * Module exports
+ *
  * @param {Object} opts
  * @api public
  */
@@ -16,38 +62,21 @@ module.exports = function (opts) {
 	opts = opts || {};
 
 	return through.obj(function (file, enc, cb) {
-		if (file.isNull()) {
-			cb(null, file);
-			return;
-		}
+		plugin(file, enc, opts, cb);
+	});
+};
 
-		if (file.isStream()) {
-			cb(new Error('Streaming is not supported'));
-			return;
-		}
+/**
+ * Module exports constructor
+ *
+ * @param {Object} opts
+ * @api public
+ */
 
-		if (!isPng(file.contents)) {
-			cb(null, file);
-			return;
-		}
+module.exports.ctor = function (opts) {
+	opts = opts || {};
 
-		var exec = new ExecBuffer({ stderr: false });
-		var args = ['-brute', '-force', '-q'];
-
-		if (opts.reduce) {
-			args.push('-reduce');
-		}
-
-		exec
-			.use(pngcrush, args.concat([exec.src(), exec.dest()]))
-			.run(file.contents, function (err, buf) {
-				if (err) {
-					cb(err);
-					return;
-				}
-
-				file.contents = buf;
-				cb(null, file);
-			});
+	return through.ctor({ objectMode: true }, function (file, enc, cb) {
+		plugin(file, enc, opts, cb);
 	});
 };
