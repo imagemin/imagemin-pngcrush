@@ -13,27 +13,7 @@ test('optimize a PNG', function (t) {
 	read(path.join(__dirname, 'fixtures/test.png'), function (err, file) {
 		t.assert(!err, err);
 
-		var stream = pngcrush();
-		var size = file.contents.length;
-
-		stream.on('data', function (data) {
-			t.assert(data.contents.length < size);
-			t.assert(isPng(data.contents));
-		});
-
-		stream.end(file);
-	});
-});
-
-test('optimize a PNG using ctor', function (t) {
-	t.plan(3);
-
-	var Pngcrush = pngcrush.ctor();
-
-	read(path.join(__dirname, 'fixtures/test.png'), function (err, file) {
-		t.assert(!err, err);
-
-		var stream = new Pngcrush();
+		var stream = pngcrush()();
 		var size = file.contents.length;
 
 		stream.on('data', function (data) {
@@ -51,7 +31,7 @@ test('skip optimizing non-PNG file', function (t) {
 	read(__filename, function (err, file) {
 		t.assert(!err, err);
 
-		var stream = pngcrush();
+		var stream = pngcrush()();
 		var buf = file.contents.slice();
 
 		stream.on('data', function (data) {

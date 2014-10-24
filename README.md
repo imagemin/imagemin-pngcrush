@@ -38,7 +38,7 @@ var pngcrush = require('imagemin-pngcrush');
 
 gulp.task('default', function () {
 	return gulp.src('images/*.png')
-		.pipe(pngcrush())
+		.pipe(pngcrush({ reduce: true })())
 		.pipe(gulp.dest('build/images'));
 });
 ```
