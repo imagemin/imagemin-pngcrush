@@ -1,6 +1,6 @@
 {
   "name": "imagemin-pngcrush",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "pngcrush imagemin plugin",
   "license": "MIT",
   "repository": "imagemin/imagemin-pngcrush",
