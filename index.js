@@ -5,17 +5,10 @@ var isPng = require('is-png');
 var pngcrush = require('pngcrush-bin').path;
 var through = require('through2');
 
-/**
- * pngcrush imagemin plugin
- *
- * @param {Object} opts
- * @api public
- */
-
 module.exports = function (opts) {
 	opts = opts || {};
 
-	return through.ctor({ objectMode: true }, function (file, enc, cb) {
+	return through.ctor({objectMode: true}, function (file, enc, cb) {
 		if (file.isNull()) {
 			cb(null, file);
 			return;
@@ -31,7 +24,7 @@ module.exports = function (opts) {
 			return;
 		}
 
-		var exec = new ExecBuffer({ stderr: false });
+		var exec = new ExecBuffer({stderr: false});
 		var args = ['-brute', '-force', '-q'];
 
 		if (opts.reduce) {
@@ -46,7 +39,10 @@ module.exports = function (opts) {
 					return;
 				}
 
-				file.contents = buf;
+				if (buf.length < file.contents.length) {
+					file.contents = buf;
+				}
+
 				cb(null, file);
 			});
 	});

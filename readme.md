@@ -19,7 +19,7 @@ var pngcrush = require('imagemin-pngcrush');
 var imagemin = new Imagemin()
 	.src('images/*.png')
 	.dest('build/images')
-	.use(pngcrush({ reduce: true }));
+	.use(pngcrush({reduce: true}));
 
 imagemin.run(function (err, files) {
 	if (err) {
@@ -38,7 +38,7 @@ var pngcrush = require('imagemin-pngcrush');
 
 gulp.task('default', function () {
 	return gulp.src('images/*.png')
-		.pipe(pngcrush({ reduce: true })())
+		.pipe(pngcrush({reduce: true})())
 		.pipe(gulp.dest('build/images'));
 });
 ```
