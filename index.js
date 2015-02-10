@@ -24,15 +24,15 @@ module.exports = function (opts) {
 			return;
 		}
 
-		var exec = new ExecBuffer({stderr: false});
+		var execBuffer = new ExecBuffer();
 		var args = ['-brute', '-force', '-q'];
 
 		if (opts.reduce) {
 			args.push('-reduce');
 		}
 
-		exec
-			.use(pngcrush, args.concat([exec.src(), exec.dest()]))
+		execBuffer
+			.use(pngcrush, args.concat([execBuffer.src(), execBuffer.dest()]))
 			.run(file.contents, function (err, buf) {
 				if (err) {
 					cb(err);
