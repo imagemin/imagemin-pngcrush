@@ -5,7 +5,7 @@
 
 ## Install
 
-```bash
+```
 $ npm install --save imagemin-pngcrush
 ```
 
@@ -14,41 +14,36 @@ $ npm install --save imagemin-pngcrush
 
 ```js
 var Imagemin = require('imagemin');
-var pngcrush = require('imagemin-pngcrush');
+var imageminPngcrush = require('imagemin-pngcrush');
 
-var imagemin = new Imagemin()
+new Imagemin()
 	.src('images/*.png')
 	.dest('build/images')
-	.use(pngcrush({reduce: true}));
-
-imagemin.run(function (err, files) {
-	if (err) {
-		throw err;
-	}
-
-	console.log('Files optimized successfully!');
-});
+	.use(imageminPngcrush({reduce: true}))
+	.run();
 ```
 
 You can also use this plugin with [gulp](http://gulpjs.com/):
 
 ```js
 var gulp = require('gulp');
-var pngcrush = require('imagemin-pngcrush');
+var imageminPngcrush = require('imagemin-pngcrush');
 
 gulp.task('default', function () {
 	return gulp.src('images/*.png')
-		.pipe(pngcrush({reduce: true})())
+		.pipe(imageminPngcrush({reduce: true})())
 		.pipe(gulp.dest('build/images'));
 });
 ```
 
 
-## Options
+## API
 
-### reduce
+### imageminPngcrush(options)
 
-Type: `Boolean`  
+#### options.reduce
+
+Type: `boolean`  
 Default: `false`
 
 Enable lossless color-type or bit-depth reduction.
