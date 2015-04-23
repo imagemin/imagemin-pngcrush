@@ -2,7 +2,7 @@
 
 var ExecBuffer = require('exec-buffer');
 var isPng = require('is-png');
-var pngcrush = require('pngcrush-bin').path;
+var pngcrush = require('pngcrush-bin');
 var through = require('through2');
 
 module.exports = function (opts) {
