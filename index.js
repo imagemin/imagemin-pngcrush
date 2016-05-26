@@ -1,50 +1,37 @@
 'use strict';
+const execBuffer = require('exec-buffer');
+const isPng = require('is-png');
+const pngcrush = require('pngcrush-bin');
 
-var ExecBuffer = require('exec-buffer');
-var isPng = require('is-png');
-var pngcrush = require('pngcrush-bin');
-var through = require('through2');
+module.exports = opts => buf => {
+	opts = Object.assign({}, opts);
 
-module.exports = function (opts) {
-	opts = opts || {};
+	if (!Buffer.isBuffer(buf)) {
+		return Promise.reject(new TypeError('Expected a buffer'));
+	}
 
-	return through.ctor({objectMode: true}, function (file, enc, cb) {
-		if (file.isNull()) {
-			cb(null, file);
-			return;
-		}
+	if (!isPng(buf)) {
+		return Promise.resolve(buf);
+	}
 
-		if (file.isStream()) {
-			cb(new Error('Streaming is not supported'));
-			return;
-		}
+	const args = [
+		'-brute',
+		'-force',
+		'-q'
+	];
 
-		if (!isPng(file.contents)) {
-			cb(null, file);
-			return;
-		}
+	if (opts.reduce) {
+		args.push('-reduce');
+	}
 
-		var execBuffer = new ExecBuffer();
-		var args = ['-brute', '-force', '-q'];
+	args.push(execBuffer.input, execBuffer.output);
 
-		if (opts.reduce) {
-			args.push('-reduce');
-		}
-
-		execBuffer
-			.use(pngcrush, args.concat([execBuffer.src(), execBuffer.dest()]))
-			.run(file.contents, function (err, buf) {
-				if (err) {
-					err.fileName = file.path;
-					cb(err);
-					return;
-				}
-
-				if (buf.length < file.contents.length) {
-					file.contents = buf;
-				}
-
-				cb(null, file);
-			});
+	return execBuffer({
+		input: buf,
+		bin: pngcrush,
+		args
+	}).catch(err => {
+		err.message = err.stderr || err.message;
+		throw err;
 	});
 };

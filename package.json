@@ -21,17 +21,16 @@
     }
   ],
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "ava"
   },
   "files": [
     "index.js"
   ],
   "keywords": [
     "compress",
-    "gulpplugin",
     "image",
     "imageminplugin",
     "img",
@@ -41,14 +40,12 @@
     "pngcrush"
   ],
   "dependencies": {
-    "exec-buffer": "^2.0.1",
+    "exec-buffer": "^3.0.0",
     "is-png": "^1.0.0",
-    "pngcrush-bin": "^3.0.0",
-    "through2": "^0.6.1"
+    "pngcrush-bin": "^3.0.0"
   },
   "devDependencies": {
-    "ava": "^0.0.4",
-    "buffer-equal": "^0.0.1",
-    "vinyl-file": "^1.1.0"
+    "ava": "*",
+    "pify": "^2.3.0"
   }
 }
