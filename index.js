@@ -22,6 +22,8 @@ module.exports = opts => buf => {
 
 	if (opts.reduce) {
 		args.push('-reduce');
+	} else {
+		args.push('-noreduce');
 	}
 
 	args.push(execBuffer.input, execBuffer.output);
