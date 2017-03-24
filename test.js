@@ -3,7 +3,7 @@ import path from 'path';
 import isPng from 'is-png';
 import pify from 'pify';
 import test from 'ava';
-import m from './';
+import m from '.';
 
 test(async t => {
 	const buf = await pify(fs.readFile)(path.join(__dirname, 'fixture.png'));
