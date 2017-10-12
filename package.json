@@ -1,26 +1,36 @@
 {
   "name": "imagemin-pngcrush",
-  "version": "4.0.0",
+  "version": "5.1.0",
   "description": "pngcrush imagemin plugin",
   "license": "MIT",
   "repository": "imagemin/imagemin-pngcrush",
   "author": {
     "name": "Kevin Mårtensson",
     "email": "kevinmartensson@gmail.com",
-    "url": "https://github.com/kevva"
+    "url": "github.com/kevva"
   },
+  "maintainers": [
+    {
+      "name": "Sindre Sorhus",
+      "email": "sindresorhus@gmail.com",
+      "url": "sindresorhus.com"
+    },
+    {
+      "name": "Shinnosuke Watanabe",
+      "url": "github.com/shinnn"
+    }
+  ],
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "xo && ava"
   },
   "files": [
     "index.js"
   ],
   "keywords": [
     "compress",
-    "gulpplugin",
     "image",
     "imageminplugin",
     "img",
@@ -30,14 +40,14 @@
     "pngcrush"
   ],
   "dependencies": {
-    "exec-buffer": "^2.0.1",
+    "exec-buffer": "^3.0.0",
     "is-png": "^1.0.0",
     "pngcrush-bin": "~3.0.0",
     "through2": "^0.6.1"
   },
   "devDependencies": {
-    "ava": "^0.0.4",
-    "buffer-equal": "^0.0.1",
-    "vinyl-file": "^1.1.0"
+    "ava": "*",
+    "pify": "^2.3.0",
+    "xo": "*"
   }
 }
