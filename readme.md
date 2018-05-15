@@ -39,6 +39,13 @@ Default: `false`
 
 Enable lossless color-type or bit-depth reduction.
 
+##### method
+
+Type: `integer`<br>
+Default: `undefined`
+
+Use a specific method (such as 113) instead of the -brute flag.
+
 #### buffer
 
 Type: `buffer`
