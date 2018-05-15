@@ -15,7 +15,6 @@ module.exports = opts => buf => {
 	}
 
 	const args = [
-		'-brute',
 		'-force',
 		'-q'
 	];
@@ -25,7 +24,12 @@ module.exports = opts => buf => {
 	} else {
 		args.push('-noreduce');
 	}
-
+	if (opts.method) {
+		args.push('-method ' + opts.method);
+	} else {
+		args.push('-brute);
+	}
+			  
 	args.push(execBuffer.input, execBuffer.output);
 
 	return execBuffer({
