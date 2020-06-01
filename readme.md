@@ -16,13 +16,16 @@ $ npm install --save imagemin-pngcrush
 const imagemin = require('imagemin');
 const imageminPngcrush = require('imagemin-pngcrush');
 
-imagemin(['images/*.png'], 'build/images', {
-	plugins: [
-		imageminPngcrush()
-	]
-}).then(() => {
+(async () => {
+	await imagemin(['images/*.png'], {
+		destination: 'build/images',
+		plugins: [
+			imageminPngcrush()
+		]
+	});
+
 	console.log('Images optimized');
-});
+})();
 ```
 
 
