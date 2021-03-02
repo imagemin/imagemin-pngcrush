@@ -1,4 +1,4 @@
-# imagemin-pngcrush [![Build Status](http://img.shields.io/travis/imagemin/imagemin-pngcrush.svg?style=flat)](https://travis-ci.org/imagemin/imagemin-pngcrush)
+# imagemin-pngcrush ![GitHub Actions Status](https://github.com/imagemin/imagemin-pngcrush/workflows/test/badge.svg?branch=master)
 
 > pngcrush imagemin plugin
 
