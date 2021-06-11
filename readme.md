@@ -1,14 +1,12 @@
-# imagemin-pngcrush ![GitHub Actions Status](https://github.com/imagemin/imagemin-pngcrush/workflows/test/badge.svg?branch=master)
+# imagemin-pngcrush
 
 > pngcrush imagemin plugin
-
 
 ## Install
 
 ```
 $ npm install --save imagemin-pngcrush
 ```
-
 
 ## Usage
 
@@ -28,16 +26,15 @@ const imageminPngcrush = require('imagemin-pngcrush');
 })();
 ```
 
-
 ## API
 
-### imageminPngcrush([options])(buffer)
+### imageminPngcrush(options?)(buffer)
 
 #### options
 
 ##### reduce
 
-Type: `boolean`<br>
+Type: `boolean`\
 Default: `false`
 
 Enable lossless color-type or bit-depth reduction.
@@ -47,8 +44,3 @@ Enable lossless color-type or bit-depth reduction.
 Type: `buffer`
 
 Buffer to optimize.
-
-
-## License
-
-MIT © [imagemin](https://github.com/imagemin)
